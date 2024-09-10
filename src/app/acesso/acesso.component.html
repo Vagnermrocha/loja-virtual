@@ -1,0 +1,19 @@
+<div class="grid-container">
+  <div class="grid-item item1">
+    <img src="./../../assets/logo.jpeg" alt="logo da loja" />
+  </div>
+
+  <div class="grid-item item2">
+    <h1>Loja fake Estilo</h1>
+    <h5>Rua Sem Saída, s/n° | Fone: (11)3666-3333</h5>
+    <h6>Fundão dos Fundos / SP</h6>
+    <h6>CEP. 01.666-333</h6>
+  </div>
+
+  <div class="grid-item item3">
+    <label for="password">Senha:</label>
+    <input type="password" id="password" [(ngModel)]="password" />
+    <button (click)="checkPassword()">Entrar</button>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>
+</div>

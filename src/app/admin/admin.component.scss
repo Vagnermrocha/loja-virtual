@@ -1,0 +1,138 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); // Fundo escuro com transparência
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column; // Coloca os itens em colunas
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-top: 10px;
+    }
+
+    input,
+    select,
+    button {
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}
+
+.categories {
+  ul {
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    border: 2px solid black;
+    position: absolute; // Torna o menu absoluto para controlar a posição
+    background-color: white; // Fundo branco para o menu
+    z-index: 1000; // Garante que o menu fique acima de outros elementos
+    margin-bottom: 10px; // Adiciona espaço abaixo da lista de categorias
+
+    li {
+      display: flex;
+      margin: 10px;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      border: 1px solid black;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+}
+
+button.toggle-menu {
+  margin: 20px 0 20px;
+}
+
+
+.admin-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; // Espaçamento entre os itens
+
+  .product-card {
+    display: flex;
+    flex-direction: column; // Empilha os elementos verticalmente
+    justify-content: space-between; // Distribui o espaço entre os itens
+    width: calc(25% - 10px); // Ajustando a largura para caber quatro itens por linha com espaçamento
+    box-sizing: border-box; // Inclui padding e border na largura total
+    margin-bottom: 10px; // Espaçamento inferior entre os itens
+    border: 1px solid #ccc; // Adicionando uma borda aos produtos
+    padding: 5px; // Adicionando padding interno para espaçamento
+    border-radius: 5px; // Adicionando cantos arredondados
+    background-color: #fff; // Definindo uma cor de fundo para os produtos
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Adicionando uma sombra leve
+
+    img {
+      width: 50px; // Garantindo que a imagem ocupe a largura total do contêiner
+      height: auto; // Mantendo a proporção da imagem
+    }
+
+    h4,
+    p {
+      margin: 0 0 5px; // Ajustando o espaçamento entre os elementos de texto
+    }
+
+    button {
+      margin-top: auto; // Empurra o botão para o final do contêiner
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-products {
+    gap: 5px; // Reduzindo o espaçamento entre os itens em telas menores
+  }
+
+  .product-card {
+    width: calc(33.33% - 5px); // Ajustando a largura para telas menores
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    width: calc(50% - 5px); // Ajustando a largura para ocupar metade da linha em telas muito pequenas
+  }
+}

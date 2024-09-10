@@ -1,0 +1,58 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Remove o scroll */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0; /* Remove margens */
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/fundo.jpeg");
+  background-size: cover; /* Ajusta para cobrir todo o fundo */
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1; /* Coloca a imagem de fundo atrás do conteúdo */
+  opacity: 0.1; /* Ajusta a opacidade para 10% */
+}
+
+
+.home {
+  flex-grow: 1; /* Faz com que a home ocupe o espaço disponível */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+  overflow: auto; /* Permite scroll interno se necessário */
+}
+
+ul {
+  width: 200px;
+  list-style-type: none; /* Remove os marcadores da lista */
+  padding: 10px; /* Adiciona padding interno */
+  margin: 0; /* Remove margens externas */
+  background-color: #f9f9f9; /* Cor de fundo */
+  border: 1px solid #ccc; /* Borda */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+li {
+  margin-bottom: 10px; /* Espaçamento entre os itens da lista */
+  padding: 5px; /* Adiciona padding interno */
+  background-color: #f9f9f9; /* Cor de fundo */
+  border-bottom: 1px solid #ccc; /* Borda inferior */
+}
+
+.categories {
+  margin-top: 10px; /* Espaçamento acima das categorias */
+  text-align: left; /* Alinha o texto à esquerda */
+}

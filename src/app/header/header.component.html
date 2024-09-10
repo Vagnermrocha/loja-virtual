@@ -1,0 +1,176 @@
+<div class="grid-container">
+  <div class="grid-item item1">
+    <img src="./../../assets/logo.jpeg" alt="logo da loja" />
+  </div>
+
+  <div class="grid-item item2">
+    <h1>Loja fake Estilo</h1>
+    <h5>Rua Sem Saída, s/n° | Fone: (11)3666-3333</h5>
+    <h6>Fundão dos Fundos / SP</h6>
+    <h6>CEP. 01.666-333</h6>
+  </div>
+
+  <div class="grid-item item3">
+    <section>
+      <form (submit)="searchProducts()">
+        <input
+          type="text"
+          placeholder="Selecione um produto"
+          [(ngModel)]="searchText"
+          name="searchText"
+          aria-label="Campo de pesquisa de produtos"
+        />
+        <button
+          class="primary"
+          type="button"
+          (click)="searchProducts()"
+          aria-label="Pesquisar produtos"
+        >
+          Pesquisar
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <div class="grid-item item4">
+    <div class="header-item buttons-container">
+      <button (click)="toggleModal()">Crie a sua conta</button>
+      <button (click)="openLogin()">Entre</button>
+    </div>
+
+    <div *ngIf="isModalVisible" class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="toggleModal()">X</span>
+     <form (ngSubmit)="adicionarUsuario()">
+          <label for="email">Email:</label>
+          <input
+            id="email"
+            [(ngModel)]="novoUsuario.email"
+            name="email"
+            required
+          />
+
+          <label for="username">Username:</label>
+          <input
+            id="username"
+            [(ngModel)]="novoUsuario.username"
+            name="username"
+            required
+          />
+
+          <label for="password">Senha:</label>
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="novoUsuario.password"
+            name="password"
+            required
+          />
+
+          <label for="firstname">Primeiro Nome:</label>
+          <input
+            id="firstname"
+            [(ngModel)]="novoUsuario.name.firstname"
+            name="firstname"
+            required
+          />
+
+          <label for="lastname">Último Nome:</label>
+          <input
+            id="lastname"
+            [(ngModel)]="novoUsuario.name.lastname"
+            name="lastname"
+            required
+          />
+
+          <label for="city">Cidade:</label>
+          <input
+            id="city"
+            [(ngModel)]="novoUsuario.address.city"
+            name="city"
+            required
+          />
+
+          <label for="street">Rua:</label>
+          <input
+            id="street"
+            [(ngModel)]="novoUsuario.address.street"
+            name="street"
+            required
+          />
+
+          <label for="number">Número:</label>
+          <input
+            id="number"
+            type="number"
+            [(ngModel)]="novoUsuario.address.number"
+            name="number"
+            required
+          />
+
+          <label for="zipcode">CEP:</label>
+          <input
+            id="zipcode"
+            [(ngModel)]="novoUsuario.address.zipcode"
+            name="zipcode"
+            required
+          />
+
+          <label for="lat">Latitude:</label>
+          <input
+            id="lat"
+            [(ngModel)]="novoUsuario.address.geolocation.lat"
+            name="lat"
+            required
+          />
+
+          <label for="long">Longitude:</label>
+          <input
+            id="long"
+            [(ngModel)]="novoUsuario.address.geolocation.long"
+            name="long"
+            required
+          />
+
+          <label for="phone">Telefone:</label>
+          <input
+            id="phone"
+            [(ngModel)]="novoUsuario.phone"
+            name="phone"
+            required
+          />
+
+          <button type="submit">Cadastrar</button>
+        </form>
+
+
+      </div>
+    </div>
+
+    <div class="cart-container">
+      <mat-icon>shopping_cart</mat-icon>
+      <ul>
+        <li *ngFor="let item of items" class="cart-item">
+          <div class="cart-item-info">
+            {{ item.title }} - {{ item.price | currency }}
+          </div>
+          <div class="cart-item-buttons">
+            <button (click)="decreaseQuantity(item)">-</button>
+            <input
+              type="number"
+              [(ngModel)]="item.quantity"
+              min="1"
+              aria-label="Quantidade do produto"
+            />
+            <button (click)="increaseQuantity(item)">+</button>
+            <button (click)="removeItem(item.id!)">Remover</button>
+          </div>
+        </li>
+      </ul>
+      <div>Total: {{ calculateTotal() | currency }}</div>
+    </div>
+  </div>
+
+
+
+</div>

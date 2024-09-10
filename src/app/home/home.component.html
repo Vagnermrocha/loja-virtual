@@ -1,0 +1,32 @@
+<div *ngIf="isLoggedIn" class="welcome-message">
+  <p>Bem-vindo, {{ username }}! Boas compras!</p>
+  <button (click)="logout()">Sair</button>
+</div>
+<app-header (searchEvent)="searchProducts($event)"></app-header>
+
+<div class="container">
+  <div class="home">
+    <div class="background-image"></div>
+  </div>
+
+  <div class="menu">
+    <button (click)="toggleMenu()">{{ selectedCategoryLabel }}</button>
+  </div>
+
+  <div class="categories" *ngIf="isMenuVisible">
+    <ul>
+      <li
+        *ngFor="let category of categories"
+        (click)="selectCategory(category)"
+      >
+        {{ category }}
+      </li>
+    </ul>
+  </div>
+
+  <app-products
+    [products]="filteredProducts"
+    [category]="selectedCategory"
+  ></app-products>
+
+</div>

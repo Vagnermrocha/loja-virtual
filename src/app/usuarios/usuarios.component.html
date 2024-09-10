@@ -1,0 +1,24 @@
+<div class="users">
+  <h2>Lista de Usuários</h2>
+  <div class="list">
+    <ul>
+      <li *ngFor="let user of users">
+        <div class="container">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Senha:</strong> {{ user.password }}</p>
+        <p><strong>Primeiro Nome:</strong> {{ user.name.firstname }}</p>
+        <p><strong>Último Nome:</strong> {{ user.name.lastname }}</p>
+        <p><strong>Cidade:</strong> {{ user.address.city }}</p>
+        <p><strong>Rua:</strong> {{ user.address.street }}</p>
+        <p><strong>Número:</strong> {{ user.address.number }}</p>
+        <p><strong>CEP:</strong> {{ user.address.zipcode }}</p>
+        <p><strong>Latitude:</strong> {{ user.address.geolocation.lat }}</p>
+        <p><strong>Longitude:</strong> {{ user.address.geolocation.long }}</p>
+        <p><strong>Telefone:</strong> {{ user.phone }}</p>
+      </div>
+        <button (click)="deletarUsuario(user.id)">Deletar</button>
+      </li>
+    </ul>
+  </div>
+</div>
