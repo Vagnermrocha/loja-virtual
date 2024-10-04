@@ -1,15 +1,23 @@
 .container {
-  background-color: rgba(255, 255, 255, 0.603);
-  h1 {
-    display: flex;
-    color: rgba(0, 0, 0, 0.692)
-  }
-  .admin {
-    //display: flex;
-    margin-right: 120px;
-  }
-  .users {
-    display: flex;
-    margin-left: 100px;
-  }
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
 }
+
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+mat-toolbar {
+  justify-content: center;
+  font-size: 24px;
+}
+
+button {
+  font-size: 16px;
+}
+
+

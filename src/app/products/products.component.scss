@@ -1,54 +1,54 @@
-ul {
-  list-style: none;
-  padding: 0;
+.product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; // Espaçamento entre os itens
-
-  li {
-    display: flex;
-    flex-direction: column; // Empilha os elementos verticalmente
-    justify-content: space-between; // Distribui o espaço entre os itens
-    width: calc(25% - 10px); // Ajustando a largura para caber quatro itens por linha com espaçamento
-    box-sizing: border-box; // Inclui padding e border na largura total
-    margin-bottom: 10px; // Espaçamento inferior entre os itens
-    border: 1px solid #ccc; // Adicionando uma borda aos produtos
-    padding: 5px; // Adicionando padding interno para espaçamentobox
-    border-radius: 5px; // Adicionando cantos arredondados
-    background-color: #fff; // Definindo uma cor de fundo para os produtos
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Adicionando uma sombra leve
-
-    img {
-      width: 50px; // Garantindo que a imagem não ultrapasse a largura do contêiner
-      height: auto; // Mantendo a proporção da imagem
-    }
-
-    h3,
-    p {
-      margin: 0 0 5px; // Ajustando o espaçamento entre os elementos de texto
-    }
-
-    button {
-      margin-top: auto; // Empurra o botão para o final do contêiner li
-    }
-  }
+  overflow: hidden;
+  gap: 5px;
 
 }
 
-@media (max-width: 768px) {
-  ul {
-    gap: 5px; // Reduzindo o espaçamento entre os itens em telas menores
-  }
+.product-card {
+  width: calc(24% - 10px);
+  border: 1px solid black;
+  box-sizing: border-box;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+}
 
-  li {
-    width: calc(33.33% - 5px); // Ajustando a largura para telas menores
+.mat-card-content {
+  padding: 8px;
+  flex-grow: 1;
+}
+
+.mat-card-actions {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.product-card img {
+  width: 40%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.product-description {
+  font-size: 0.8em;
+  width: 40% !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    width: calc(25% - 5px);
   }
 }
 
 @media (max-width: 480px) {
-  li {
-    width: calc(
-      50% - 5px
-    ); // Ajustando a largura para ocupar metade da linha em telas muito pequenas
+  .product-card {
+    width: calc(50% - 5px);
   }
 }

@@ -1,6 +1,12 @@
 <div class="container">
-  <h1>Acesso Administrativo</h1>
+  <mat-toolbar color="primary">
+    <span>Acesso Administrativo</span>
+  </mat-toolbar>
 
-  <button class="admin" (click)="navigateTo('admin')">Admin</button>
-  <button class="usuarios" (click)="navigateTo('usuarios')">Usuários</button>
+  <div class="button-container">
+    <button mat-raised-button color="accent" (click)="navigateTo('admin')">Admin</button>
+    <button mat-raised-button color="accent" (click)="navigateTo('usuarios')">Usuários</button>
+    <button mat-raised-button color="accent" (click)="navigateTo('charts')">Gráficos</button>
+  </div>
 </div>
+

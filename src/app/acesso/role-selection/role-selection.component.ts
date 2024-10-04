@@ -19,6 +19,8 @@ export class RoleSelectionComponent {
       this.router.navigate(['/admin']);
     } else if (role === 'usuarios') {
       this.router.navigate(['/usuarios']);
+    } else if (role === 'charts') {
+      this.router.navigate(['/charts']);
     }
     this.dialogRef.close();
   }

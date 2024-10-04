@@ -2,7 +2,7 @@ body,
 html {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* Remove o scroll */
+  // overflow: hidden; /* Remove o scroll */
 }
 
 .container {
@@ -37,7 +37,7 @@ html {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 10% 25% 25% 35%;
+  grid-template-columns: 5% 20% 35% 35%;
   gap: 10px;
   width: 100%; /* Garante que o grid ocupe toda a largura */
 }
@@ -45,12 +45,6 @@ html {
 .grid-item {
   margin-top: 10px;
   padding: 5px;
-}
-.grid-item.item2 h1,
-.grid-item.item2 h5,
-.grid-item.item2 h6 {
-  line-height: 1.5; /* Ajuste o valor conforme necessário */
-  margin: 0; /* Remove margens padrão */
 }
 
 .item1 {
@@ -60,19 +54,58 @@ html {
   height: 50px;
 }
 
-.item2,
-.item3,
+.item2 {
+  display: grid;
+}
+
+.custom-list-item {
+  color: #000 !important;
+  height: 25px !important;
+}
+
+.item3 {
+  display: flex;
+  flex-direction: row;
+  // gap: 10px;
+  margin-right: 0;
+
+  mat-form-field,
+  button {
+    display: flex;
+    height: 70px;
+    background-color: white;
+    align-items: center;
+    align-content: space-between;
+    line-height: 0;
+    margin: 10px;
+  }
+
+  .button {
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+}
+
 .item4 {
   margin-top: 20px;
   align-items: center;
   justify-content: center;
+
+  .button {
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
 }
 
-.menu {
+.account-container {
   display: flex;
-  align-items: flex-end;
-  margin-top: 50px;
-  text-align: center;
+  gap: 30px; /* Adiciona um gap de 30px entre os elementos */
 }
 
 .modal {
@@ -133,29 +166,35 @@ html {
   }
 }
 
-.buttons-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.header-item button {
-  flex: 1;
-  margin: 0 5px;
-}
 .cart-container {
   display: flex;
   align-items: center;
+  mat-icon {
+    font-size: 24px;
+    color: red;
+  }
 }
 
 .cart-container mat-icon {
-  margin-right: 8px;
+  margin-right: 16px;
 }
+
+.cart-list {
+  width: 100%;
+}
+
+.cart-list ul {
+  list-style-type: none; /* Remove os pontos da lista */
+  padding: 0;
+}
+
 .cart-item {
   border: 1px solid #000;
   padding: 8px;
   border-radius: 4px;
   margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-item-info {
@@ -165,8 +204,24 @@ html {
 .cart-item-buttons {
   display: flex;
   align-items: center;
+  gap: 8px;
+}
+
+.cart-item-buttons mat-form-field {
+  width: 80px;
 }
 
 .cart-item-buttons button {
   margin: 0 4px;
 }
+
+.modal .modal-content .cadastrar-button {
+  background-color: #f0f0f0;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #000;
+}
+

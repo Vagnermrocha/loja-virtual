@@ -1,31 +1,26 @@
-.users {
-  .list {
-    ul {
-      list-style-type: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
 
-      li {
-        flex: 1 1 calc(25% - 10px);
-        box-sizing: border-box;
-        background-color: #fff;
-        border: 2px solid black;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin: 10px 0;
+.user-card {
+  width: 300px;
+  margin: 10px;
+}
 
-        &:hover {
-          background-color: #f0f0f0;
-        }
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-        .container {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-    }
-  }
+mat-card-content p {
+  margin: 5px 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
 }

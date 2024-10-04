@@ -33,4 +33,8 @@ export class ProductService {
     this.productsSubject.next(products);
     return this.http.put(this.url, products);
   }
+
+  updateProduct(productId: number, product: any): Observable<any> {
+    return this.http.put(`${this.url}/${productId}`, product);
+  }
 }

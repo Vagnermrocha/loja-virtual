@@ -1,34 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { DssFormFieldModule } from '@dss/components';
+import { DssButtonModule, DssFormFieldModule } from '@dss/components';
 import { DssIconModule } from '@dss/components/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { DssListModule } from '@dss/components/list';
 import { FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
+
 const DSS_COMPONENTS = [
   DssFormFieldModule,
-  DssIconModule
+  DssIconModule,
+  DssListModule,
+  DssButtonModule,
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    DSS_COMPONENTS,
-    HttpClientModule,
-    MatButtonModule,
-    MatToolbarModule,
-    FormsModule,
-    MatIconModule,
-  ],
-  exports: [
-    DSS_COMPONENTS,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-
-  ],
+  imports: [CommonModule, HttpClientModule, FormsModule, DSS_COMPONENTS ],
+  exports: [DSS_COMPONENTS],
 })
 export class SharedModule {}

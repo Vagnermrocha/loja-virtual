@@ -12,7 +12,7 @@ export class ProductsComponent implements OnChanges {
   @Input() products: Product[] = [];
   @Input() category: string = '';
 
-  constructor(private cartService: CartService, private productService: ProductService) {} // Injetar o serviço de produtos
+  constructor(private cartService: CartService, private productService: ProductService) {} 
 
   ngOnChanges(): void {}
 

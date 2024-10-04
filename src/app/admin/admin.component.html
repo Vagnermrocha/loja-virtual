@@ -1,82 +1,72 @@
-
-<button (click)="toggleModal()">Administração de Produtos</button>
+<button mat-raised-button (click)="toggleModal()">Administração de Produtos</button>
 
 <div *ngIf="isModalVisible" class="modal">
   <div class="modal-content">
     <span class="close" (click)="toggleModal()">X</span>
     <form (ngSubmit)="addProduct()">
-      <label for="title">Título:</label>
-      <input
-        type="text"
-        id="title"
-        [(ngModel)]="newProduct.title"
-        name="title"
-        required
-      />
+      <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input matInput [(ngModel)]="newProduct.title" name="title" required aria-label="title" />
+      </mat-form-field>
 
-      <label for="price">Preço:</label>
-      <input
-        type="number"
-        id="price"
-        [(ngModel)]="newProduct.price"
-        name="price"
-        required
-      />
+      <mat-form-field>
+        <mat-label>Preço</mat-label>
+        <input matInput type="number" [(ngModel)]="newProduct.price" name="price" required aria-label="price"/>
+      </mat-form-field>
 
-      <label for="description">Descrição:</label>
-      <input
-        type="text"
-        id="description"
-        [(ngModel)]="newProduct.description"
-        name="description"
-        required
-      />
+      <mat-form-field>
+        <mat-label>Descrição</mat-label>
+        <input matInput [(ngModel)]="newProduct.description" name="description" required aria-label="description"/>
+      </mat-form-field>
 
-      <label for="image">URL da Imagem:</label>
-      <input
-        type="text"
-        id="image"
-        [(ngModel)]="newProduct.image"
-        name="image"
-        required
-      />
+      <mat-form-field>
+        <mat-label>URL da Imagem</mat-label>
+        <input matInput [(ngModel)]="newProduct.image" name="image" required aria-label="image"/>
+      </mat-form-field>
 
-      <label for="category">Categoria:</label>
-      <select
-        id="category"
-        [(ngModel)]="newProduct.category"
-        name="category"
-        required
-      >
-        <option *ngFor="let category of categories" [value]="category">
-          {{ category }}
-        </option>
-      </select>
+      <mat-form-field>
+        <mat-label>Categoria</mat-label>
+        <mat-select [(ngModel)]="newProduct.category" name="category" required>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <button type="submit">Adicionar Produto</button>
+      <button mat-raised-button type="submit">Adicionar Produto</button>
     </form>
   </div>
 </div>
 
-<button class="toggle-menu" (click)="toggleMenu()">
-  {{ selectedCategoryLabel }}
-</button>
-<div class="categories" *ngIf="isMenuVisible">
-  <ul>
-    <li *ngFor="let category of categories" (click)="selectCategory(category)">
-      {{ category }}
-    </li>
-  </ul>
+<div class="menu">
+  <button mat-flat-button color="primary" (click)="toggleMenu()">
+    {{ selectedCategoryLabel }}
+  </button>
 </div>
 
-<div *ngIf="filteredProducts.length > 0" class="admin-products">
-  <div *ngFor="let product of filteredProducts" class="product-card">
-    <h4>{{ product.title }}</h4>
-    <p>{{ product.description }}</p>
-    <p>Preço: {{ product.price | currency }}</p>
-    <img [src]="product.image" alt="{{ product.title }}" />
-    <button (click)="removeProduct(product.id)">Remover Produto</button>
-  </div>
+<div class="categories" *ngIf="isMenuVisible">
+  <mat-nav-list>
+    <mat-list-item
+      *ngFor="let category of categories"
+      (click)="selectCategory(category)"
+      class="category-item"
+    >
+      {{ category }}
+    </mat-list-item>
+  </mat-nav-list>
 </div>
+
+<div *ngIf="filteredProducts.length > 0" class="product-list">
+  <mat-card *ngFor="let product of filteredProducts" class="product-card">
+    <img mat-card-image [src]="product.image" alt="{{ product.title }}" />
+    <mat-card-content>
+      <h4>{{ product.title }}</h4>
+      <p>{{ product.description }}</p>
+      <p>Price: ${{ product.price }}</p>
+      <button (click)="removeProduct(product.id)">Remover Produto</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <p *ngIf="filteredProducts.length === 0">Nenhum produto encontrado.</p>
 

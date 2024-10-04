@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../shared/service/user.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Usuario } from '../shared/loja.interface';
 
 @Component({
   selector: 'app-usuarios',
@@ -7,14 +10,13 @@ import { UserService } from '../shared/service/user.service';
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
-  // users: any[] = [];
   @Input() users: any[] = [];
+  isAdmin: boolean = true; // Supondo que você tenha uma maneira de definir isso com base no usuário logado
 
-
-  constructor(private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.users$.subscribe(users => {
+    this.userService.users$.subscribe((users) => {
       this.users = users;
       console.log('Dados dos usuários recebidos:', users);
     });
@@ -22,15 +24,14 @@ export class UsuariosComponent implements OnInit {
   }
 
   obterUsuarios(): void {
-    this.userService.getAllUsuarios().subscribe(users => {
+    this.userService.getAllUsuarios().subscribe((users) => {
       this.users = users;
       console.log('Lista de usuários atualizada:', users);
     });
   }
 
-
   adicionarUsuario(): void {
-    const novoUsuario = {
+    const novoUsuario: Usuario = {
       email: 'novo.email@gmail.com',
       username: 'novousuario',
       password: 'senha123',
@@ -40,34 +41,36 @@ export class UsuariosComponent implements OnInit {
         street: 'Rua',
         number: 123,
         zipcode: '12345-678',
-        geolocation: { lat: '-23.5505', long: '-46.6333' }
+        geolocation: { lat: '-23.5505', long: '-46.6333' },
       },
-      phone: '123-456-7890'
+      phone: '123-456-7890',
     };
 
-  //   this.userService.addUsuario(novoUsuario).subscribe(
-  //     (newUser) => {
-  //       console.log('Novo usuário:', newUser);
-  //       this.obterUsuarios(); // Atualiza a lista de usuários após adicionar um novo usuário
-  //     },
-  //     (error) => {
-  //       console.error('Erro ao cadastrar usuário:', error);
-  //     }
-  //   );
-  // }
-  this.userService.addUsuario(novoUsuario).subscribe((response: any) => {
-    console.log('Usuário adicionado:', response);
-    this.users.push(response);
-    this.userService.updateUsuario(this.users);
-  });
-}
+    // Gerar novo ID baseado no último ID existente
+    const novoId =
+      this.users.length > 0
+        ? Math.max(...this.users.map((user) => user.id || 0)) + 1
+        : 1;
+    novoUsuario.id = novoId;
 
-
-
-
-  deletarUsuario(id: number): void {
-    this.userService.deleteUsuario(id).subscribe(() => {
-      console.log('Usuário deletado:', id);
+    this.userService.addUsuario(novoUsuario).subscribe((response: Usuario) => {
+      console.log('Usuário adicionado:', response);
+      this.users.push(response);
+      this.userService.updateUsuario(this.users);
     });
+  }
+
+  deletarUsuario(userId: number): void {
+    this.http.delete(`${environment.apiUrl}/users/${userId}`).subscribe(
+      (response: any) => {
+        console.log('Usuário deletado com sucesso', response);
+
+        this.users = this.users.filter((user) => user.id !== userId);
+        this.userService.updateUsuario(this.users);
+      },
+      (error: any) => {
+        console.error('Erro ao deletar usuário', error);
+      }
+    );
   }
 }

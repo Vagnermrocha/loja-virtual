@@ -4,173 +4,270 @@
   </div>
 
   <div class="grid-item item2">
-    <h1>Loja fake Estilo</h1>
-    <h5>Rua Sem Saída, s/n° | Fone: (11)3666-3333</h5>
-    <h6>Fundão dos Fundos / SP</h6>
-    <h6>CEP. 01.666-333</h6>
+    <mat-list class="list">
+      <mat-list-item class="custom-list-item"
+        ><b>Loja fake Estilo</b></mat-list-item
+      >
+      <mat-list-item class="custom-list-item"
+        >Rua Sem Saída, s/n°
+      </mat-list-item>
+      <mat-list-item class="custom-list-item"
+        >Fone: (11)3666-3333</mat-list-item
+      >
+      <mat-list-item class="custom-list-item"
+        >Fundão dos Fundos / SP</mat-list-item
+      >
+      <mat-list-item class="custom-list-item">CEP. 01.666-333</mat-list-item>
+    </mat-list>
   </div>
 
   <div class="grid-item item3">
-    <section>
-      <form (submit)="searchProducts()">
-        <input
-          type="text"
-          placeholder="Selecione um produto"
-          [(ngModel)]="searchText"
-          name="searchText"
-          aria-label="Campo de pesquisa de produtos"
-        />
-        <button
-          class="primary"
-          type="button"
-          (click)="searchProducts()"
-          aria-label="Pesquisar produtos"
-        >
-          Pesquisar
-        </button>
-      </form>
-    </section>
+    <mat-form-field appearance="fill">
+      <mat-label>Selecione um produto</mat-label>
+      <input
+        matInput
+        placeholder="Selecione um produto"
+        [(ngModel)]="searchText"
+        name="searchText"
+      />
+    </mat-form-field>
+
+    <div class="example-button-row">
+      <button mat-flat-button class="button" (click)="searchProducts()">
+        Pesquisar
+      </button>
+    </div>
   </div>
 
   <div class="grid-item item4">
-    <div class="header-item buttons-container">
-      <button (click)="toggleModal()">Crie a sua conta</button>
-      <button (click)="openLogin()">Entre</button>
+    <div class="account-container" *ngIf="!isLoggedIn">
+      <button mat-flat-button class="button" (click)="toggleModal()">
+        Crie a sua conta
+      </button>
+      <button mat-flat-button class="button" (click)="openLogin()">
+        Entre
+      </button>
     </div>
 
     <div *ngIf="isModalVisible" class="modal">
       <div class="modal-content">
         <span class="close" (click)="toggleModal()">X</span>
-     <form (ngSubmit)="adicionarUsuario()">
-          <label for="email">Email:</label>
-          <input
-            id="email"
-            [(ngModel)]="novoUsuario.email"
-            name="email"
-            required
-          />
+        <form (ngSubmit)="adicionarUsuario()">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              id="email"
+              [formControl]="emailControl"
+              name="email"
+              required
+              aria-label="Email"
+              type="email"
+            />
+            <mat-error *ngIf="emailControl.invalid && emailControl.touched">
+              Por favor, insira um email válido.
+            </mat-error>
+          </mat-form-field>
 
-          <label for="username">Username:</label>
-          <input
-            id="username"
-            [(ngModel)]="novoUsuario.username"
-            name="username"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              id="username"
+              [(ngModel)]="novoUsuario.username"
+              name="username"
+              required
+              aria-label="Username"
+            />
+          </mat-form-field>
 
-          <label for="password">Senha:</label>
-          <input
-            id="password"
-            type="password"
-            [(ngModel)]="novoUsuario.password"
-            name="password"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input
+              matInput
+              id="password"
+              type="password"
+              [(ngModel)]="novoUsuario.password"
+              name="password"
+              required
+              aria-label="Senha"
+            />
+          </mat-form-field>
 
-          <label for="firstname">Primeiro Nome:</label>
-          <input
-            id="firstname"
-            [(ngModel)]="novoUsuario.name.firstname"
-            name="firstname"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Primeiro Nome</mat-label>
+            <input
+              matInput
+              id="firstname"
+              [(ngModel)]="novoUsuario.name.firstname"
+              name="firstname"
+              required
+              aria-label="Primeiro Nome"
+            />
+          </mat-form-field>
 
-          <label for="lastname">Último Nome:</label>
-          <input
-            id="lastname"
-            [(ngModel)]="novoUsuario.name.lastname"
-            name="lastname"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Último Nome</mat-label>
+            <input
+              matInput
+              id="lastname"
+              [(ngModel)]="novoUsuario.name.lastname"
+              name="lastname"
+              required
+              aria-label="Último Nome"
+            />
+          </mat-form-field>
 
-          <label for="city">Cidade:</label>
-          <input
-            id="city"
-            [(ngModel)]="novoUsuario.address.city"
-            name="city"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Cidade</mat-label>
+            <input
+              matInput
+              id="city"
+              [(ngModel)]="novoUsuario.address.city"
+              name="city"
+              required
+              aria-label="Cidade"
+            />
+          </mat-form-field>
 
-          <label for="street">Rua:</label>
-          <input
-            id="street"
-            [(ngModel)]="novoUsuario.address.street"
-            name="street"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Rua</mat-label>
+            <input
+              matInput
+              id="street"
+              [(ngModel)]="novoUsuario.address.street"
+              name="street"
+              required
+              aria-label="Rua"
+            />
+          </mat-form-field>
 
-          <label for="number">Número:</label>
-          <input
-            id="number"
-            type="number"
-            [(ngModel)]="novoUsuario.address.number"
-            name="number"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Número</mat-label>
+            <input
+              matInput
+              id="number"
+              type="number"
+              [(ngModel)]="novoUsuario.address.number"
+              name="number"
+              required
+              aria-label="Número"
+            />
+          </mat-form-field>
 
-          <label for="zipcode">CEP:</label>
-          <input
-            id="zipcode"
-            [(ngModel)]="novoUsuario.address.zipcode"
-            name="zipcode"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>CEP</mat-label>
+            <input
+              matInput
+              id="zipcode"
+              [(ngModel)]="novoUsuario.address.zipcode"
+              name="zipcode"
+              required
+              aria-label="CEP"
+              pattern="^[0-9]*$"
+              #zipcode="ngModel"
+            />
+            <mat-error *ngIf="zipcode.invalid && zipcode.touched">
+              Por favor, insira um CEP válido. Apenas números são permitidos.
+            </mat-error>
+          </mat-form-field>
 
-          <label for="lat">Latitude:</label>
-          <input
-            id="lat"
-            [(ngModel)]="novoUsuario.address.geolocation.lat"
-            name="lat"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Latitude</mat-label>
+            <input
+              matInput
+              id="lat"
+              [(ngModel)]="novoUsuario.address.geolocation.lat"
+              name="lat"
+              required
+              aria-label="Latitude"
+            />
+          </mat-form-field>
 
-          <label for="long">Longitude:</label>
-          <input
-            id="long"
-            [(ngModel)]="novoUsuario.address.geolocation.long"
-            name="long"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Longitude</mat-label>
+            <input
+              matInput
+              id="long"
+              [(ngModel)]="novoUsuario.address.geolocation.long"
+              name="long"
+              required
+              aria-label="Longitude"
+            />
+          </mat-form-field>
 
-          <label for="phone">Telefone:</label>
-          <input
-            id="phone"
-            [(ngModel)]="novoUsuario.phone"
-            name="phone"
-            required
-          />
+          <mat-form-field appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input
+              matInput
+              id="phone"
+              [(ngModel)]="novoUsuario.phone"
+              name="phone"
+              required
+              aria-label="Telefone"
+            />
+          </mat-form-field>
 
-          <button type="submit">Cadastrar</button>
+          <button mat-flat-button type="submit" class="cadastrar-button">
+            Cadastrar
+          </button>
         </form>
-
-
       </div>
     </div>
 
     <div class="cart-container">
       <mat-icon>shopping_cart</mat-icon>
-      <ul>
-        <li *ngFor="let item of items" class="cart-item">
-          <div class="cart-item-info">
-            {{ item.title }} - {{ item.price | currency }}
-          </div>
-          <div class="cart-item-buttons">
-            <button (click)="decreaseQuantity(item)">-</button>
-            <input
-              type="number"
-              [(ngModel)]="item.quantity"
-              min="1"
-              aria-label="Quantidade do produto"
-            />
-            <button (click)="increaseQuantity(item)">+</button>
-            <button (click)="removeItem(item.id!)">Remover</button>
-          </div>
-        </li>
-      </ul>
-      <div>Total: {{ calculateTotal() | currency }}</div>
+      <div class="cart-list">
+        <ul>
+          <li *ngFor="let item of cartService.getItems()" class="cart-item">
+            <div class="cart-item-info">
+              {{ item.title }} - {{ item.price | currency }}
+            </div>
+            <div class="cart-item-buttons">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="decreaseQuantity(item)"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              <mat-form-field appearance="outline">
+                <mat-label>Quantidade</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="item.quantity"
+                  min="1"
+                  aria-label="Quantidade do produto"
+                />
+              </mat-form-field>
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="increaseQuantity(item)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="removeItem(item.id!)"
+              >
+                Remover
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div>Total: {{ calculateTotal() | currency }}</div>
+        <button
+          mat-flat-button
+          class="button"
+          (click)="finalizePurchase()"
+          *ngIf="cartService.getItems().length > 0"
+        >
+          Finalizar Compra
+        </button>
+      </div>
     </div>
   </div>
-
-
-
 </div>

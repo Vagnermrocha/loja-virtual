@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from './../shared/service/menu.service';
 import { ProductService } from './../shared/service/products.service';
 import { LoginService } from '../shared/service/login.service';
+import { CartService } from './../shared/service/cart.service'; // Importe o CartService
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,19 +11,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  shouldLoadHighcharts = false;
   isLoggedIn: boolean = false;
   username: string = '';
   isMenuVisible = false;
   categories: string[] = [];
   selectedCategory: string = '';
-  selectedCategoryLabel: string = 'Categorias'; // Adicione esta linha
-  allProducts: any[] = []; // Todos os produtos
-  filteredProducts: any[] = []; // Produtos filtrados por categoria ou pesquisa
+  selectedCategoryLabel: string = 'Categorias';
+  allProducts: any[] = [];
+  filteredProducts: any[] = [];
 
   constructor(
     private menuService: MenuService,
     private productService: ProductService,
     private loginService: LoginService,
+    private cartService: CartService, // Adicione o CartService ao construtor
     private router: Router
   ) {
     this.productService.getAllProducts().subscribe((products) => {
@@ -35,8 +38,7 @@ export class HomeComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (token) {
       this.isLoggedIn = true;
-      // Aqui você pode decodificar o token para obter o nome de usuário, se necessário
-      this.username = 'Usuário'; // Substitua pelo nome de usuário real, se disponível
+      this.username = 'Usuário';
     }
 
     this.menuService.obterCategories().subscribe((data: string[]) => {
@@ -47,7 +49,13 @@ export class HomeComponent implements OnInit {
       this.allProducts = products;
       this.filteredProducts = products;
     });
+
+    // Ouça o evento cartUpdated
+    this.cartService.cartUpdated.subscribe(() => {
+      this.reloadProducts();
+    });
   }
+
   logout(): void {
     this.loginService.logout();
     this.router.navigate(['/home']).then(() => {
@@ -60,12 +68,11 @@ export class HomeComponent implements OnInit {
   }
 
   selectCategory(category: string): void {
-    this.selectedCategory = category;
-    this.selectedCategoryLabel = category; // Atualiza o rótulo da categoria selecionada
+    this.selectedCategoryLabel = category;
     this.filteredProducts = this.allProducts.filter(
       (product) => product.category === category
     );
-    this.isMenuVisible = false; // Fecha o menu após a seleção
+    this.isMenuVisible = false;
   }
 
   searchProducts(searchText: string): void {
@@ -76,7 +83,17 @@ export class HomeComponent implements OnInit {
           product.description.toLowerCase().includes(searchText.toLowerCase())
       );
     } else {
-      this.filteredProducts = this.allProducts; // Se o campo de pesquisa estiver vazio, exibe todos os produtos
+      this.filteredProducts = this.allProducts;
     }
   }
+
+  reloadProducts(): void {
+    this.productService.getAllProducts().subscribe((products) => {
+      this.allProducts = products;
+      this.filteredProducts = products;
+    });
+  }
 }
+
+
+

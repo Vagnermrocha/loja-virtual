@@ -7,6 +7,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AcessoComponent } from './acesso/acesso.component';
 import { LoginComponent } from './usuarios/login/login.component';
+import { HighchartsComponent } from './highcharts/highcharts.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'acesso', component: AcessoComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'charts', component: HighchartsComponent }, 
   {
     path: 'admin',
     component: AdminComponent,

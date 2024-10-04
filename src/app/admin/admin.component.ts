@@ -3,7 +3,8 @@ import { AdminService } from './../shared/service/admin.service';
 import { ProductService } from '../shared/service/products.service';
 import { MenuService } from '../shared/service/menu.service';
 import { environment } from 'src/environments/environment';
-import { UserService } from '../shared/service/user.service';
+import { HttpClient } from '@angular/common/http';
+import { Product } from '../shared/loja.interface';
 
 @Component({
   selector: 'app-admin',
@@ -13,34 +14,53 @@ import { UserService } from '../shared/service/user.service';
 export class AdminComponent implements OnInit {
   products: any[] = [];
   categories: string[] = [];
-  newProduct = {
+  newProduct: Product = {
     title: '',
     price: 0,
     description: '',
     image: '',
     category: '',
+    id: 0,
+    rating: {
+      rate: 0,
+      count: 0,
+    },
   };
   isMenuVisible: boolean = false;
-  isModalVisible: boolean = false; // Adicione esta linha
+  isModalVisible: boolean = false;
   selectedCategory: string = '';
-  selectedCategoryLabel: string = 'Categorias';
+  selectedCategoryLabel: string = 'Select Category';
   filteredProducts: any[] = [];
+  allProducts: Product[] = [];
+
+  private url = `${environment.apiUrl}/products`;
 
   constructor(
     private adminService: AdminService,
     private productService: ProductService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private httpClient: HttpClient
   ) {}
 
   ngOnInit(): void {
+    this.menuService.obterCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
     this.loadProducts();
     this.loadCategories();
+
+    this.httpClient
+      .get<Product[]>('https://fakestoreapi.com/products')
+      .subscribe((products) => {
+        this.allProducts = products;
+      });
   }
 
   loadProducts(): void {
     this.adminService.getAllProducts().subscribe((products) => {
       this.products = products;
-      this.filteredProducts = products; // Inicialmente, todos os produtos são exibidos
+      this.allProducts = products;
+      this.filteredProducts = products;
     });
   }
 
@@ -51,6 +71,14 @@ export class AdminComponent implements OnInit {
   }
 
   addProduct(): void {
+    // Encontrar o maior ID existente
+    const maxId =
+      this.products.length > 0
+        ? Math.max(...this.products.map((p) => p.id))
+        : 0;
+    // Atribuir um novo ID incrementado ao novo produto
+    this.newProduct.id = maxId + 1;
+
     fetch(`${environment.apiUrl}/products`, {
       method: 'POST',
       body: JSON.stringify(this.newProduct),
@@ -63,9 +91,10 @@ export class AdminComponent implements OnInit {
         console.log('Produto adicionado:', response);
         this.products.push(response);
         this.filteredProducts.push(response);
-        this.productService.updateProducts(this.products); // Atualize os produtos
+        this.allProducts.push(response);
+        this.productService.updateProducts(this.products);
         this.resetNewProduct();
-        this.isModalVisible = false; // Fecha o modal após adicionar o produto
+        this.isModalVisible = false;
       });
   }
 
@@ -80,7 +109,10 @@ export class AdminComponent implements OnInit {
       this.filteredProducts = this.filteredProducts.filter(
         (product) => product.id !== productId
       );
-      this.productService.updateProducts(this.products); // Atualize os produtos
+      this.allProducts = this.allProducts.filter(
+        (product) => product.id !== productId
+      );
+      this.productService.updateProducts(this.products);
     });
   }
 
@@ -107,6 +139,11 @@ export class AdminComponent implements OnInit {
       description: '',
       image: '',
       category: '',
+      id: 0,
+      rating: {
+        rate: 0,
+        count: 0,
+      },
     };
   }
 
@@ -115,13 +152,13 @@ export class AdminComponent implements OnInit {
   }
 
   toggleModal(): void {
-    this.isModalVisible = !this.isModalVisible; // Alterna a visibilidade do modal
+    this.isModalVisible = !this.isModalVisible;
   }
 
   selectCategory(category: string): void {
     this.selectedCategory = category;
     this.selectedCategoryLabel = category;
-    this.filteredProducts = this.products.filter(
+    this.filteredProducts = this.allProducts.filter(
       (product) => product.category === category
     );
     this.isMenuVisible = false;

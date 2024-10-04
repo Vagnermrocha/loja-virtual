@@ -10,14 +10,21 @@ import { FormsModule } from '@angular/forms'; // Importando FormsModule
 import { MenuService } from './shared/service/menu.service';
 import { ProductService } from './shared/service/products.service';
 import { SharedModule } from './shared/shared.module';
-import { MatIconModule } from '@angular/material/icon';
 import { AdminComponent } from './admin/admin.component';
 import { AcessoComponent } from './acesso/acesso.component';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { LoginComponent } from './usuarios/login/login.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { RoleSelectionComponent } from './acesso/role-selection/role-selection.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminService } from './shared/service/admin.service';
+import { CartService } from './shared/service/cart.service';
+import { LoginService } from './shared/service/login.service';
+import { UserService } from './shared/service/user.service';
+import { MaterialModule } from './material/material.module';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { HighchartsComponent } from './highcharts/highcharts.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +37,7 @@ import { RoleSelectionComponent } from './acesso/role-selection/role-selection.c
     UsuariosComponent,
     LoginComponent,
     RoleSelectionComponent,
+    HighchartsComponent,
   ],
   imports: [
     CommonModule,
@@ -38,11 +46,22 @@ import { RoleSelectionComponent } from './acesso/role-selection/role-selection.c
     HttpClientModule,
     FormsModule,
     SharedModule,
-    MatIconModule,
-    MatDialogModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    HighchartsChartModule,
+    ReactiveFormsModule,
   ],
-  providers: [MenuService, ProductService],
+  providers: [
+    MenuService,
+    ProductService,
+    AdminService,
+    CartService,
+    LoginService,
+    UserService,
+  ],
   bootstrap: [AppComponent],
-  schemas: [NO_ERRORS_SCHEMA] // Adicionando NO_ERRORS_SCHEMA aqui
+  schemas: [NO_ERRORS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {
+
+}

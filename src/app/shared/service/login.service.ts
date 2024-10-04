@@ -30,6 +30,7 @@ export class LoginService {
     );
   }
 
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }

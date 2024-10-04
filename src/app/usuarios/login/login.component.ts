@@ -18,13 +18,13 @@ export class LoginComponent {
       console.log('Token recebido:', response.token);
       // Armazenar o token no localStorage ou sessionStorage
       localStorage.setItem('token', response.token);
-      // Redirecionar para a página de home após o login bem-sucedido
+
       this.router.navigate(['/home']).then(() => {
         window.location.href = '/home';
       });
     }, error => {
       console.error('Erro no login:', error);
-      // Exibir mensagem de erro ou tomar outra ação apropriada
+
     });
   }
 }

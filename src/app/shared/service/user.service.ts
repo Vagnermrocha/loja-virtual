@@ -30,32 +30,25 @@ export class UserService {
   }
 
   addUsuario(user: any): Observable<any> {
-    return this.http.post(this.url, user);
-  }
-
-  // addUsuario(user: any): Observable<any> {
-  //   console.log('Enviando dados do usuário:', user);
-  //   return this.http.post<any>(`${this.url}`, user).pipe(
-  //     tap(newUser => {
-  //       console.log('Novo usuário:', newUser);
-  //       const updatedUsers = [...this.usersSubject.value, newUser];
-  //       this.usersSubject.next(updatedUsers);
-  //     })
-  //   );
-  // }
-
-  updateUsuario(users: any[]) {
-    this.usersSubject.next(users);
-    return this.http.put(this.url, users).pipe(
-      tap(updatedUser => console.log('Usuário atualizado:', updatedUser))
+    console.log('Enviando dados do usuário:', user);
+    return this.http.post<any>(`${this.url}`, user).pipe(
+      tap((newUser) => {
+        console.log('Novo usuário:', newUser);
+        // Atualizar a lista de usuários com o novo usuário
+        const updatedUsers = [...this.usersSubject.value, newUser];
+        this.usersSubject.next(updatedUsers);
+      })
     );
   }
 
-  // updateUsuario(id: number, user: any): Observable<any> {
-  //   return this.http.put<any>(`${this.url}/${id}`, user).pipe(
-  //     tap(updatedUser => console.log('Usuário atualizado:', updatedUser))
-  //   );
-  // }
+  updateUsuario(users: any[]) {
+    this.usersSubject.next(users);
+    return this.http
+      .put(this.url, users)
+      .pipe(
+        tap((updatedUser) => console.log('Usuário atualizado:', updatedUser))
+      );
+  }
 
   deleteUsuario(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}/${id}`).pipe(
