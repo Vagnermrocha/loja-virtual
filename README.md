@@ -1,27 +1,56 @@
-# LojaVirtual
+🛍️ Loja Virtual
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+Projeto de e-commerce desenvolvido com Angular 15.2.6. Esta aplicação simula uma loja virtual com estrutura modular, ideal para estudos de front-end com foco em componentização e boas práticas.
 
-## Development server
+🚀 Tecnologias utilizadas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular 15.2.6
+- TypeScript
+- HTML / SCSS
+- Angular CLI
 
-## Code scaffolding
+📦 Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- ✅ Estrutura inicial de uma loja virtual
+- ✅ Componentes reutilizáveis
+- ✅ Organização modular
+- ✅ Preparado para integração com backend
 
-## Build
+▶️ Como executar o projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone o repositório
 
-## Running unit tests
+`bash
+git clone https://github.com/Vagnermrocha/loja-virtual.git
+cd loja-virtual
+`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Instale as dependências
 
-## Running end-to-end tests
+`bash
+npm install
+`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Inicie o servidor de desenvolvimento
 
-## Further help
+`bash
+ng serve
+`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Acesse em: http://localhost:4200
+
+📚 Aprendizados
+
+Este projeto foi criado para praticar:
+- Estruturação de projetos Angular
+- Componentização e boas práticas
+- Organização de rotas e módulos
+- Preparação para consumo de APIs REST
+
+📄 Licença
+
+Este projeto está sob a licença MIT.
+
+---
+
+Desenvolvido com 💻 por Vagner Rocha
